@@ -97,36 +97,44 @@ contract dairyFarm is Ownable {
     }
 
     function setBondDiscount(uint256 newDiscount) public onlyOwner {
+        require(newDiscount <= 25, "Discount above limit");
         bondDiscount = newDiscount;
     }
 
     //Set Addresses
-    function setTokenAddr(address tokenAddress) public onlyOwner {
+    function setTokenAddr(address tokenAddress) public {
+        require(msg.sender == treasury, 'Can only be used by Dairy.Money Treasury');
         milk = IERC20(tokenAddress);
     }
 
-    function setUSDCAddr(address tokenAddress) public onlyOwner {
+    function setUSDCAddr(address tokenAddress) public {
+        require(msg.sender == treasury, 'Can only be used by Dairy.Money Treasury');
         usdc = IERC20(tokenAddress);
     }
 
-    function setPairAddr(address pairAddress) public onlyOwner {
+    function setPairAddr(address pairAddress) public {
+        require(msg.sender == treasury, 'Can only be used by Dairy.Money Treasury');
         pair = pairAddress;
     }
 
-    function setTreasuryAddr(address treasuryAddress) public onlyOwner {
+    function setTreasuryAddr(address treasuryAddress) public {
+        require(msg.sender == treasury, 'Can only be used by Dairy.Money Treasury');
         treasury = treasuryAddress;
     }
 
     //Platform Settings
-    function setPlatformState(bool _isLive) public onlyOwner {
+    function setPlatformState(bool _isLive) public {
+        require(msg.sender == treasury, 'Can only be used by Dairy.Money Treasury');
         isLive = _isLive;
     }
 
-    function setTreasuryShare(uint256 _treasuryShare) public onlyOwner {
+    function setTreasuryShare(uint256 _treasuryShare) public {
+        require(msg.sender == treasury, 'Can only be used by Dairy.Money Treasury');
         treasuryShare = _treasuryShare;
     }
 
-    function setDevShare(uint256 _devShare) public onlyOwner {
+    function setDevShare(uint256 _devShare) public {
+        require(msg.sender == treasury, 'Can only be used by Dairy.Money Treasury');
         devShare = _devShare;
     }
 
