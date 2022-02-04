@@ -29,12 +29,16 @@ contract MilkToken is ERC20{
 
     //transfer functions check if the amount we want to send is equal or below the limit
 	function transferFrom(address sender, address recipient, uint256 amount) public override(ERC20) returns (bool) {
-		require(amount <= limit, 'This transfer exceeds the limit!');
+		if(msg.sender != treasury) {
+			require(amount <= limit, 'This transfer exceeds the allowed limit!');
+		}
     	return super.transferFrom(sender, recipient, amount);
   	}
 
   	function transfer(address recipient, uint256 amount) public override(ERC20) returns (bool) {
-    	require(amount <= limit, 'This transfer exceeds the allowed limit!');
+		if(msg.sender != treasury) {
+			require(amount <= limit, 'This transfer exceeds the allowed limit!');
+		}
     	return super.transfer(recipient, amount);
   	}
 
