@@ -44,7 +44,7 @@ contract MilkToken is ERC20{
     	balanceLimit = _limit * 1e18;
   	}
 
-	function seLpAddress(address _lp) public{
+	function setLpAddress(address _lp) public{
     	require(msg.sender == treasury, 'You must be the treasury to run this.');
     	lp = _lp;
   	}
